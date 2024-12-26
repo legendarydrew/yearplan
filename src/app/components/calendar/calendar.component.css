@@ -1,0 +1,72 @@
+.year-calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.month-container {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.weekday {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.day.event-day {
+  background-color: #ffc107;
+  color: white;
+  font-weight: bold;
+}
+
+.calendar-container {
+  overflow: auto;
+}
+
+.month-grid {
+  display: flex;
+}
+
+.calendar-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.month-name {
+  padding-right: 1em;
+  text-align: left;
+  width: 8em;
+}
+
+.day {
+  width: 2cm;
+  padding: 0.25em;
+  vertical-align: top;
+  text-align: left;
+}
+
+td.day {
+  height: 2cm;
+}
+
+td.day:not(:empty) {
+  border: 2px solid #111;
+}
+
+.day .day-number {
+  font-weight: bold;
+  font-size: 1em;
+}

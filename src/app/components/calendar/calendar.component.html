@@ -1,0 +1,29 @@
+<div class="calendar-container">
+
+  <table class="calendar-table">
+
+    <thead>
+    <tr>
+      <th class="month-name" scope="col">&nbsp;</th>
+      @for (day of weekdaySpots; track $index) {
+        <th class="day" scope="col">{{ weekdayNames[$index % 7] }}</th>
+      }
+    </tr>
+    </thead>
+    <tbody>
+      @for (month of months; track month) {
+        <tr>
+          <th class="month-name" scope="row">{{ month.name }}</th>
+          @for (day of month.days; track day) {
+            <td class="day" [class.event-day]="day.hasEvent">
+              @if (day.date) {
+                <span class="day-number">{{ day.date }}</span>
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</div>
