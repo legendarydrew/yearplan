@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { EventsEditorComponent } from './components/events-editor/events-editor.component';
-import { CalendarEvent } from './interfaces';
+import { CalendarEvent, YearPlan } from './interfaces';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +14,21 @@ import { CalendarEvent } from './interfaces';
 export class AppComponent implements OnInit {
   title = 'yearplan';
 
-  eventsList: CalendarEvent[] = [];
+  plan: YearPlan = {
+    year: (new Date()).getFullYear(),
+    events: []
+  };
 
   ngOnInit() {
     // Fetch any saved events from localStorage.
     const yp = localStorage.getItem('yp');
-    this.eventsList = yp ? JSON.parse(yp)['events'] : [];
+    if (yp) {
+      this.plan = { ...this.plan, ...JSON.parse(yp) };
+    }
   }
 
   updateEventsHandler(events: CalendarEvent[]): void {
-    this.eventsList = events;
-    localStorage.setItem('yp', JSON.stringify({ events: events }));
+    this.plan.events = events;
+    localStorage.setItem('yp', JSON.stringify(this.plan));
   }
 }

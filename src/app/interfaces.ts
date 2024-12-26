@@ -1,3 +1,8 @@
+export interface YearPlan {
+  year: number;
+  events: CalendarEvent[];
+}
+
 export interface CalendarSpot {
   date: number|null;
   hasEvent: boolean;
