@@ -1,0 +1,40 @@
+<ul>
+  @for (event of eventsList; track event) {
+  <li>
+    {{ event.name }}
+  </li>
+  }
+</ul>
+
+<form [formGroup]="form" (ngSubmit)="addHandler()">
+  <label for="eventName">Event Name</label>
+  <input id="eventName" type="text" formControlName="name">
+
+  <fieldset formGroupName="start">
+    <legend>Start</legend>
+
+    <label for="eventDayStart">Day</label>
+    <input id="eventDayStart" type="number" min="1" max="31" formControlName="day">
+
+    <label for="eventMonthStart">Month</label>
+    <input id="eventMonthStart" type="number" min="1" max="12" formControlName="month">
+
+  </fieldset>
+
+  <fieldset formGroupName="end">
+    <legend>Finish</legend>
+
+    <label for="eventDayFinish">Day</label>
+    <input id="eventDayFinish" type="number" min="1" max="31" formControlName="day">
+
+    <label for="eventMonthFinish">Month</label>
+    <input id="eventMonthFinish" type="number" min="1" max="12" formControlName="month">
+
+  </fieldset>
+
+  @if (form.invalid) {
+    <div>{{ form.errors | json }}</div>
+  }
+
+  <button type="submit" [disabled]="form.invalid">Add event</button>
+</form>
