@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CalendarEvent } from '../../interfaces';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-events-editor',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JsonPipe
   ],
   templateUrl: './events-editor.component.html',
   styleUrl: './events-editor.component.css'
@@ -25,8 +27,7 @@ export class EventsEditorComponent implements OnChanges {
       day: new FormControl(null),
       month: new FormControl(null)
     })
-  });
-  // TODO form validation.
+  }, this.validate);
 
   protected eventsList: CalendarEvent[] = [];
 
@@ -54,5 +55,31 @@ export class EventsEditorComponent implements OnChanges {
   removeHandler(index: number): void {
     this.eventsList.splice(index, 1);
     this.eventsUpdate.emit(this.eventsList);
+  }
+
+  protected validate(form: AbstractControl) {
+    let errors: {[key: string]: string} = {};
+    const startDay = form.value.start.day;
+    const startMonth = form.value.start.month;
+    const endDay = form.value.end.day ?? startDay;
+    const endMonth = form.value.end.month ?? startMonth;
+    if (startDay < 1 || startDay > 31) {
+      errors['start.day'] = 'Invalid start day.';
+    }
+    if (startMonth < 1 || startMonth > 12) {
+      errors['start.month'] = 'Invalid start month.';
+    }
+
+    if (endDay < 1 || endDay > 31) {
+      errors['end.day'] = 'Invalid end day.';
+    }
+    if (endMonth < 1 || endMonth > 12) {
+      errors['end.month'] = 'Invalid end month.';
+    }
+    if (`${endMonth}${endDay}` < `${startMonth}${startDay}`) {
+      errors['end'] = 'End must be after or the same as start.';
+    }
+
+    return Object.keys(errors).length ? errors : null;
   }
 }

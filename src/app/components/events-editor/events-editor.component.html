@@ -32,5 +32,9 @@
 
   </fieldset>
 
-  <button type="submit">Add event</button>
+  @if (form.invalid) {
+    <div>{{ form.errors | json }}</div>
+  }
+
+  <button type="submit" [disabled]="form.invalid">Add event</button>
 </form>
