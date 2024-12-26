@@ -1,0 +1,20 @@
+<div class="calendar-container">
+
+  <table class="calendar-table">
+    <tbody>
+      @for (month of months; track month) {
+        <tr>
+          <th class="month-name">{{ month.name }}</th>
+          @for (day of month.days; track day) {
+            <td class="day" [class.event-day]="day.hasEvent">
+              @if (day.date) {
+                <span class="day-number">{{ day.date }}</span>
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</div>
