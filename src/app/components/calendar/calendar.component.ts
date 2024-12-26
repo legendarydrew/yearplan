@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CalendarMonth, CalendarSpot } from '../../interfaces';
 
 @Component({
@@ -8,23 +8,20 @@ import { CalendarMonth, CalendarSpot } from '../../interfaces';
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent implements OnInit {
+  @Input() year: number = 2025;
 
-  calendarYear: number;
   months: CalendarMonth[] = [];
-  weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  // TODO use locale names?
+  weekdayNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  weekdaySpots: null[] = [];
 
-  constructor() {
-    // Automatically set the year to the current year.
-    this.calendarYear = new Date().getFullYear();
-  }
 
   ngOnInit(): void {
     this.generateYearCalendar();
   }
 
   generateYearCalendar(): void {
-    const currentYear = this.calendarYear;
+    const currentYear = this.year;
+    let spotCount = 0;
     for (let month = 0; month < 12; month++) {
       const days: CalendarSpot[] = [];
       const firstDayOfMonth = new Date(currentYear, month, 1).getDay();
@@ -44,6 +41,11 @@ export class CalendarComponent implements OnInit {
         name: new Date(currentYear, month).toLocaleString('default', { month: 'long' }),
         days
       });
+
+      spotCount = Math.max(spotCount, days.length);
     }
+
+    this.weekdaySpots = Array(spotCount);
   }
+
 }

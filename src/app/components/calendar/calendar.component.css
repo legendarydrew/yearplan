@@ -53,13 +53,16 @@
 
 .day {
   width: 2cm;
-  height: 2cm;
   padding: 0.25em;
   vertical-align: top;
   text-align: left;
 }
 
-.day:not(:empty) {
+td.day {
+  height: 2cm;
+}
+
+td.day:not(:empty) {
   border: 2px solid #111;
 }
 
