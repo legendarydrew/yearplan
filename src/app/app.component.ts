@@ -43,6 +43,10 @@ export class AppComponent implements OnInit {
     //   });
   }
 
+  /**
+   * Called when the list of events is updated from the events-editor component.
+   * @param events
+   */
   updateEventsHandler(events: CalendarEvent[]): void {
     this.plan.events = events;
     localStorage.setItem('yp', JSON.stringify(this.plan));

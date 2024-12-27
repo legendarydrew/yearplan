@@ -17,7 +17,11 @@
     <input id="eventDayStart" type="number" min="1" max="31" formControlName="day">
 
     <label for="eventMonthStart">Month</label>
-    <input id="eventMonthStart" type="number" min="1" max="12" formControlName="month">
+    <select id="eventMonthStart" formControlName="month">
+      @for (month of months; track $index) {
+        <option [ngValue]="$index">{{ month }}</option>
+      }
+    </select>
 
   </fieldset>
 
@@ -28,7 +32,11 @@
     <input id="eventDayFinish" type="number" min="1" max="31" formControlName="day">
 
     <label for="eventMonthFinish">Month</label>
-    <input id="eventMonthFinish" type="number" min="1" max="12" formControlName="month">
+    <select id="eventMonthFinish" formControlName="month">
+      @for (month of months; track $index) {
+        <option [ngValue]="$index">{{ month }}</option>
+      }
+    </select>
 
   </fieldset>
 

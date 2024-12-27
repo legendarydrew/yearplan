@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CalendarEvent } from '../../interfaces';
 
 // @ts-ignore
@@ -9,10 +9,18 @@ import { CalendarEvent } from '../../interfaces';
   templateUrl: './events-list.component.html',
   styleUrl: './events-list.component.css'
 })
-export class EventsListComponent {
+export class EventsListComponent implements OnChanges {
   @Input() events: CalendarEvent[] = [];
 
-  getEventDate(event: CalendarEvent) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['events']) {
+      // Display a sorted list of events.
+      this.events.sort((a: CalendarEvent, b: CalendarEvent) =>
+        a.start.month - b.start.month || a.start.day - b.start.day);
+    }
+  }
+
+  getEventDate(event: CalendarEvent): string {
     const dates: string[] = [];
 
     const startDate = new Date();
