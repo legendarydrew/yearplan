@@ -25,12 +25,6 @@
   text-transform: uppercase;
 }
 
-.day.event-day {
-  background-color: #ffc107;
-  color: white;
-  font-weight: bold;
-}
-
 .calendar-container {
   overflow: auto;
 }
@@ -74,4 +68,10 @@ td.day:not(:empty) {
 /* Highlighting. */
 .day.is-weekend {
   background: #DDD;
+}
+
+.day.has-event {
+  background-color: #07c1ff;
+  color: white;
+  font-weight: bold;
 }
