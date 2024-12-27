@@ -1,4 +1,8 @@
-<h1>YearPlan</h1>
+<header>
+  <h1>YearPlan</h1>
+  <button (click)="printHandler()">Print</button>
+</header>
+
 <app-year-select [year]="plan.year" (yearUpdate)="updateYearHandler($event)"></app-year-select>
 
 <app-calendar [year]="plan.year"></app-calendar>

@@ -1,0 +1,5 @@
+@media print {
+  :not(app-calendar) {
+    display: none;
+  }
+}

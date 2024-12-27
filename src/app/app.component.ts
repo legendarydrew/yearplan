@@ -61,4 +61,8 @@ export class AppComponent implements OnInit {
     this.plan.events = events;
     localStorage.setItem('yp', JSON.stringify(this.plan));
   }
+
+  printHandler(): void {
+    window.print();
+  }
 }
