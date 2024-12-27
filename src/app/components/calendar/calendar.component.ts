@@ -48,4 +48,7 @@ export class CalendarComponent implements OnInit {
     this.weekdaySpots = Array(spotCount);
   }
 
+  isWeekend(dayIndex: number): boolean {
+    return [0, 6].includes(dayIndex % 7);
+  }
 }
