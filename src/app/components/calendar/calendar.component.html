@@ -15,7 +15,7 @@
         <tr>
           <th class="month-name" scope="row">{{ month.name }}</th>
           @for (day of month.days; track day) {
-            <td class="day" [class.event-day]="day.hasEvent">
+            <td class="day" [class.has-event]="day.hasEvent" [class.is-weekend]="day.date && isWeekend($index)">
               @if (day.date) {
                 <span class="day-number">{{ day.date }}</span>
               }
