@@ -1,10 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CalendarMonth, CalendarSpot } from '../../interfaces';
+import { CalendarHeaderComponent } from '../calendar-header/calendar-header.component';
+import { CalendarFooterComponent } from '../calendar-footer/calendar-footer.component';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
   templateUrl: './calendar.component.html',
+  imports: [
+    CalendarHeaderComponent,
+    CalendarFooterComponent
+  ],
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent implements OnInit {
