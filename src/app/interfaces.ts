@@ -16,8 +16,8 @@ export interface CalendarMonth {
 export interface CalendarEvent {
   name: string;
   start: {
-    day: number | null;
-    month: number | null;
+    day: number;
+    month: number;
   };
   end: {
     day: number | null;

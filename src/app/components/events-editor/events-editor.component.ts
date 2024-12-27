@@ -17,6 +17,8 @@ export class EventsEditorComponent implements OnChanges {
   @Input() events: CalendarEvent[] = [];
   @Output() eventsUpdate = new EventEmitter<CalendarEvent[]>();
 
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
   protected form: FormGroup = new FormGroup({
     name: new FormControl<string>('', Validators.required),
     start: new FormGroup({
@@ -58,7 +60,7 @@ export class EventsEditorComponent implements OnChanges {
   }
 
   protected validate(form: AbstractControl) {
-    let errors: {[key: string]: string} = {};
+    let errors: { [key: string]: string } = {};
     const startDay = form.value.start.day;
     const startMonth = form.value.start.month;
     const endDay = form.value.end.day ?? startDay;
@@ -66,14 +68,14 @@ export class EventsEditorComponent implements OnChanges {
     if (startDay < 1 || startDay > 31) {
       errors['start.day'] = 'Invalid start day.';
     }
-    if (startMonth < 1 || startMonth > 12) {
+    if (startMonth < 0 || startMonth > 11) {
       errors['start.month'] = 'Invalid start month.';
     }
 
     if (endDay < 1 || endDay > 31) {
       errors['end.day'] = 'Invalid end day.';
     }
-    if (endMonth < 1 || endMonth > 12) {
+    if (endMonth < 0 || endMonth > 11) {
       errors['end.month'] = 'Invalid end month.';
     }
     if (`${endMonth}${endDay}` < `${startMonth}${startDay}`) {

@@ -1,5 +1,6 @@
 <h1>YearPlan</h1>
 
+<app-events-list [events]="plan.events"></app-events-list>
 <app-public-holiday-list [events]="publicHolidays"></app-public-holiday-list>
 
 <app-events-editor [events]="plan.events" (eventsUpdate)="updateEventsHandler($event)"></app-events-editor>
