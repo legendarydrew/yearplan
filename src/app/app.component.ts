@@ -5,11 +5,12 @@ import { EventsEditorComponent } from './components/events-editor/events-editor.
 import { CalendarEvent, PublicHoliday, YearPlan } from './interfaces';
 import { PublicHolidaysService } from './services/public-holidays.service';
 import { PublicHolidayListComponent } from './components/public-holiday-list/public-holiday-list.component';
+import { EventsListComponent } from './components/events-list/events-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalendarComponent, EventsEditorComponent, PublicHolidayListComponent],
+  imports: [RouterOutlet, CalendarComponent, EventsEditorComponent, PublicHolidayListComponent, EventsListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -34,12 +35,12 @@ export class AppComponent implements OnInit {
     }
 
     // Fetch public holidays for the year.
-    this.Holidays.fetch(this.plan.year)
-      .subscribe({
-        next: (events: PublicHoliday[]) => {
-          this.publicHolidays = events;
-        }
-      });
+    // this.Holidays.fetch(this.plan.year)
+    //   .subscribe({
+    //     next: (events: PublicHoliday[]) => {
+    //       this.publicHolidays = events;
+    //     }
+    //   });
   }
 
   updateEventsHandler(events: CalendarEvent[]): void {

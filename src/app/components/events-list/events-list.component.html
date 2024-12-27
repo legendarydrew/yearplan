@@ -1,0 +1,8 @@
+<h3>Events</h3>
+<ul>
+  @for (event of events; track event) {
+    <li>
+      <b>{{ getEventDate(event) }}</b> {{ event.name }}
+    </li>
+  }
+</ul>
