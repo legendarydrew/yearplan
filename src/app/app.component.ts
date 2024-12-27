@@ -4,16 +4,19 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { EventsEditorComponent } from './components/events-editor/events-editor.component';
 import { CalendarEvent, PublicHoliday, YearPlan } from './interfaces';
 import { PublicHolidaysService } from './services/public-holidays.service';
+import { PublicHolidayListComponent } from './components/public-holiday-list/public-holiday-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalendarComponent, EventsEditorComponent],
+  imports: [RouterOutlet, CalendarComponent, EventsEditorComponent, PublicHolidayListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'yearplan';
+
+  publicHolidays: PublicHoliday[] = [];
 
   plan: YearPlan = {
     year: (new Date()).getFullYear(),
@@ -34,7 +37,7 @@ export class AppComponent implements OnInit {
     this.Holidays.fetch(this.plan.year)
       .subscribe({
         next: (events: PublicHoliday[]) => {
-          console.log('Public holidays (UK)', events);
+          this.publicHolidays = events;
         }
       });
   }

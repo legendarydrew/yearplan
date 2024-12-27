@@ -19,7 +19,7 @@ export class PublicHolidaysService {
           .map((row: any) => {
             let [_, month, day] = row.date.split('-').map((v: string) => parseInt(v));
             return {
-              name: row.title, day, month
+              title: row.title, day, month
             };
           });
         return of(events);
