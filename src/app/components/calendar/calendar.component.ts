@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CalendarMonth, CalendarSpot } from '../../interfaces';
+import { CalendarMonth, CalendarSpot, YearPlan } from '../../interfaces';
 import { CalendarHeaderComponent } from '../calendar-header/calendar-header.component';
 import { CalendarFooterComponent } from '../calendar-footer/calendar-footer.component';
+import { EventsListComponent } from '../events-list/events-list.component';
+import { PublicHolidayListComponent } from '../public-holiday-list/public-holiday-list.component';
 
 @Component({
   selector: 'app-calendar',
@@ -9,12 +11,14 @@ import { CalendarFooterComponent } from '../calendar-footer/calendar-footer.comp
   templateUrl: './calendar.component.html',
   imports: [
     CalendarHeaderComponent,
-    CalendarFooterComponent
+    CalendarFooterComponent,
+    EventsListComponent,
+    PublicHolidayListComponent
   ],
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent implements OnInit {
-  @Input() year: number = 2025;
+  @Input() plan!: YearPlan;
 
   months: CalendarMonth[] = [];
   weekdayNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -26,7 +30,7 @@ export class CalendarComponent implements OnInit {
   }
 
   generateYearCalendar(): void {
-    const currentYear = this.year;
+    const currentYear = this.plan.year;
     let spotCount = 0;
     for (let month = 0; month < 12; month++) {
       const days: CalendarSpot[] = [];
@@ -56,5 +60,9 @@ export class CalendarComponent implements OnInit {
 
   isWeekend(dayIndex: number): boolean {
     return [0, 6].includes(dayIndex % 7);
+  }
+
+  get hasEvents(): boolean {
+    return this.plan.events.length > 0;
   }
 }

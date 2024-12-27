@@ -1,40 +1,23 @@
-.year-calendar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.month-container {
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-}
-
-.weekday {
-  font-weight: bold;
-  text-transform: uppercase;
+:host {
+  display: block;
+  overflow: auto;
+  height: 50vh;
 }
 
 .calendar-container {
-  overflow: auto;
-}
-
-.month-grid {
+  line-height: 1;
+  padding: 1em;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* A1 sheet. */
+  height: 594mm;
+  width: 841mm;
 }
 
 .calendar-table {
   border-collapse: collapse;
+  flex-grow: 1;
   table-layout: fixed;
   width: 100%;
 }
@@ -74,4 +57,9 @@ td.day:not(:empty) {
   background-color: #07c1ff;
   color: white;
   font-weight: bold;
+}
+
+
+.calendar-events {
+  margin: 1.5rem 0;
 }

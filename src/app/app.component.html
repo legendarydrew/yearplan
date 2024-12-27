@@ -20,8 +20,6 @@
   </div>
 </nav>
 
-<app-calendar [year]="plan.year"></app-calendar>
-<app-events-list [events]="plan.events"></app-events-list>
-<app-public-holiday-list [events]="publicHolidays"></app-public-holiday-list>
+<app-calendar [plan]="plan"></app-calendar>
 
 <app-events-editor [events]="plan.events" (eventsUpdate)="updateEventsHandler($event)"></app-events-editor>

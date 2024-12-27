@@ -1,6 +1,6 @@
 <div class="calendar-container">
 
-  <app-calendar-header [year]="year"></app-calendar-header>
+  <app-calendar-header [year]="plan.year"></app-calendar-header>
 
   <table class="calendar-table">
 
@@ -27,6 +27,12 @@
       }
     </tbody>
   </table>
+
+  @if (hasEvents) {
+    <div class="calendar-events">
+      <app-events-list [events]="plan.events"></app-events-list>
+    </div>
+  }
 
   <app-calendar-footer></app-calendar-footer>
 
