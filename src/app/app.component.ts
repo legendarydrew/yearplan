@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { EventsEditorComponent } from './components/events-editor/events-editor.component';
-import { CalendarEvent, YearPlan } from './interfaces';
+import { CalendarEvent, PublicHoliday, YearPlan } from './interfaces';
+import { PublicHolidaysService } from './services/public-holidays.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,23 @@ export class AppComponent implements OnInit {
     events: []
   };
 
+  constructor(private readonly Holidays: PublicHolidaysService) {
+  }
+
   ngOnInit() {
     // Fetch any saved events from localStorage.
     const yp = localStorage.getItem('yp');
     if (yp) {
       this.plan = { ...this.plan, ...JSON.parse(yp) };
     }
+
+    // Fetch public holidays for the year.
+    this.Holidays.fetch(this.plan.year)
+      .subscribe({
+        next: (events: PublicHoliday[]) => {
+          console.log('Public holidays (UK)', events);
+        }
+      });
   }
 
   updateEventsHandler(events: CalendarEvent[]): void {
