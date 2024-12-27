@@ -1,48 +1,62 @@
 <ul>
   @for (event of eventsList; track event) {
-  <li>
-    {{ event.name }}
-  </li>
+    <li>
+      {{ event.name }}
+    </li>
   }
 </ul>
 
-<form [formGroup]="form" (ngSubmit)="addHandler()">
-  <label for="eventName">Event Name</label>
-  <input id="eventName" type="text" formControlName="name">
+<div class="m-2 p-2 bg-light">
+  <form class="row align-items-end" [formGroup]="form" (ngSubmit)="addHandler()">
 
-  <fieldset formGroupName="start">
-    <legend>Start</legend>
+    <div class="col-4">
+      <label class="form-label fw-bold" for="eventName">Event Name</label>
+      <input class="form-control" id="eventName" type="text" formControlName="name">
+    </div>
 
-    <label for="eventDayStart">Day</label>
-    <input id="eventDayStart" type="number" min="1" max="31" formControlName="day">
+    <div class="col-3" formGroupName="start">
 
-    <label for="eventMonthStart">Month</label>
-    <select id="eventMonthStart" formControlName="month">
-      @for (month of months; track $index) {
-        <option [ngValue]="$index">{{ month }}</option>
-      }
-    </select>
+      <b>Start date</b>
+      <div class="row g-2">
+        <div class="col-4">
+          <label class="form-label" for="eventDayStart">Day</label>
+          <input class="form-control" id="eventDayStart" type="number" min="1" max="31" formControlName="day">
+        </div>
 
-  </fieldset>
+        <div class="col-8">
+          <label class="form-label" for="eventMonthStart">Month</label>
+          <select class="form-select" id="eventMonthStart" formControlName="month">
+            @for (month of months; track $index) {
+              <option [ngValue]="$index">{{ month }}</option>
+            }
+          </select>
+        </div>
+      </div>
 
-  <fieldset formGroupName="end">
-    <legend>Finish</legend>
 
-    <label for="eventDayFinish">Day</label>
-    <input id="eventDayFinish" type="number" min="1" max="31" formControlName="day">
+    </div>
 
-    <label for="eventMonthFinish">Month</label>
-    <select id="eventMonthFinish" formControlName="month">
-      @for (month of months; track $index) {
-        <option [ngValue]="$index">{{ month }}</option>
-      }
-    </select>
+    <div class="col-3" formGroupName="end">
+      <b>End date</b>
 
-  </fieldset>
+      <div class="row g-2">
+        <div class="col-4">
+          <label class="form-label" for="eventDayFinish">Day</label>
+          <input class="form-control" id="eventDayFinish" type="number" min="1" max="31" formControlName="day">
+        </div>
+        <div class="col-8">
+          <label class="form-label" for="eventMonthFinish">Month</label>
+          <select class="form-select" id="eventMonthFinish" formControlName="month">
+            @for (month of months; track $index) {
+              <option [ngValue]="$index">{{ month }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
 
-  @if (form.invalid) {
-    <div>{{ form.errors | json }}</div>
-  }
-
-  <button type="submit" [disabled]="form.invalid">Add event</button>
-</form>
+    <div class="col-2 d-grid">
+      <button class="btn btn-success" type="submit" [disabled]="form.invalid">Add event</button>
+    </div>
+  </form>
+</div>
