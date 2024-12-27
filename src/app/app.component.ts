@@ -6,11 +6,12 @@ import { CalendarEvent, PublicHoliday, YearPlan } from './interfaces';
 import { PublicHolidaysService } from './services/public-holidays.service';
 import { PublicHolidayListComponent } from './components/public-holiday-list/public-holiday-list.component';
 import { EventsListComponent } from './components/events-list/events-list.component';
+import { YearSelectComponent } from './components/year-select/year-select.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalendarComponent, EventsEditorComponent, PublicHolidayListComponent, EventsListComponent],
+  imports: [RouterOutlet, CalendarComponent, EventsEditorComponent, PublicHolidayListComponent, EventsListComponent, YearSelectComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -41,6 +42,15 @@ export class AppComponent implements OnInit {
     //       this.publicHolidays = events;
     //     }
     //   });
+  }
+
+  /**
+   * Called when the year is updated from the year-select component.
+   * @param year
+   */
+  updateYearHandler(year: number): void {
+    this.plan.year = year;
+    localStorage.setItem('yp', JSON.stringify(this.plan));
   }
 
   /**

@@ -1,5 +1,7 @@
 <h1>YearPlan</h1>
+<app-year-select [year]="plan.year" (yearUpdate)="updateYearHandler($event)"></app-year-select>
 
+<app-calendar [year]="plan.year"></app-calendar>
 <app-events-list [events]="plan.events"></app-events-list>
 <app-public-holiday-list [events]="publicHolidays"></app-public-holiday-list>
 
