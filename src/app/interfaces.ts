@@ -6,6 +6,7 @@ export interface YearPlan {
 export interface CalendarSpot {
   date: number | null;
   hasEvent: boolean;
+  events?: string[];
 }
 
 export interface CalendarMonth {

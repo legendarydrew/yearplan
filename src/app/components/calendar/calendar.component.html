@@ -21,6 +21,13 @@
               @if (day.date) {
                 <span class="day-number">{{ day.date }}</span>
               }
+              @if (day.hasEvent) {
+                <ul class="day-events">
+                  @for (event of day.events; track event) {
+                    <li>{{ event }}</li>
+                  }
+                </ul>
+              }
             </td>
           }
         </tr>

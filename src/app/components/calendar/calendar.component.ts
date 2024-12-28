@@ -88,6 +88,8 @@ export class CalendarComponent implements OnChanges {
       });
       matchingDays.forEach((day) => {
         day.hasEvent = true;
+        day.events = day.events ?? [];
+        day.events.push(event.name);
       });
     });
   }
