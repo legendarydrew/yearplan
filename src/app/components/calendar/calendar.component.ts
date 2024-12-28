@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CalendarMonth, CalendarSpot, YearPlan } from '../../interfaces';
 import { CalendarHeaderComponent } from '../calendar-header/calendar-header.component';
 import { CalendarFooterComponent } from '../calendar-footer/calendar-footer.component';
@@ -17,7 +17,7 @@ import { PublicHolidayListComponent } from '../public-holiday-list/public-holida
   ],
   styleUrl: './calendar.component.css'
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnChanges {
   @Input() plan!: YearPlan;
 
   months: CalendarMonth[] = [];
@@ -25,13 +25,17 @@ export class CalendarComponent implements OnInit {
   weekdaySpots: null[] = [];
 
 
-  ngOnInit(): void {
-    this.generateYearCalendar();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['plan']) {
+      this.generateYearCalendar();
+    }
   }
 
   generateYearCalendar(): void {
     const currentYear = this.plan.year;
     let spotCount = 0;
+    let months: CalendarMonth[] = [];
+
     for (let month = 0; month < 12; month++) {
       const days: CalendarSpot[] = [];
       const firstDayOfMonth = new Date(currentYear, month, 1).getDay();
@@ -47,7 +51,7 @@ export class CalendarComponent implements OnInit {
         days.push({ date: day, hasEvent: false }); // Modify "hasEvent" logic if needed
       }
 
-      this.months.push({
+      months.push({
         name: new Date(currentYear, month).toLocaleString('default', { month: 'long' }),
         days
       });
@@ -55,6 +59,7 @@ export class CalendarComponent implements OnInit {
       spotCount = Math.max(spotCount, days.length);
     }
 
+    this.months = months;
     this.weekdaySpots = Array(spotCount);
   }
 
