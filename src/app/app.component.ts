@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
    * @param year
    */
   updateYearHandler(year: number): void {
-    this.plan.year = year;
+    this.plan = {...this.plan, year};
     localStorage.setItem('yp', JSON.stringify(this.plan));
   }
 
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
    * @param events
    */
   updateEventsHandler(events: CalendarEvent[]): void {
-    this.plan.events = events;
+    this.plan = { ...this.plan, events};
     localStorage.setItem('yp', JSON.stringify(this.plan));
   }
 

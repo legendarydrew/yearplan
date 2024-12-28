@@ -84,4 +84,25 @@ export class EventsEditorComponent implements OnChanges {
 
     return Object.keys(errors).length ? errors : null;
   }
+
+
+  getEventDate(event: CalendarEvent): string {
+    const dates: string[] = [];
+
+    const startDate = new Date();
+    startDate.setMonth(event.start.month);
+    startDate.setDate(event.start.day);
+
+    dates.push(startDate.toLocaleString('default', { month: 'short', day: '2-digit' }));
+
+    if (event.end.day && event.end.month) {
+      const endDate = new Date();
+      endDate.setMonth(event.end.month);
+      endDate.setDate(event.end.day);
+      dates.push(endDate.toLocaleString('default', { month: 'short', day: '2-digit' }));
+    }
+
+    return dates.join('-');
+  }
+
 }
