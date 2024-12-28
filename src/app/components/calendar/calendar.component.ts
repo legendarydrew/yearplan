@@ -61,6 +61,8 @@ export class CalendarComponent implements OnChanges {
 
     this.months = months;
     this.weekdaySpots = Array(spotCount);
+
+    this.matchEventsToSpots();
   }
 
   isWeekend(dayIndex: number): boolean {
@@ -69,5 +71,24 @@ export class CalendarComponent implements OnChanges {
 
   get hasEvents(): boolean {
     return this.plan.events.length > 0;
+  }
+
+  matchEventsToSpots(): void {
+    this.plan.events.forEach((event) => {
+      const matchingDays = this.months[event.start.month].days.filter((day) => {
+        if (day.date) {
+          if (event.end.day && event.end.month) {
+            return event.start.day <= day.date && event.end.day >= day.date;
+          } else {
+            return event.start.day === day.date;
+          }
+          // TODO address events that span more than one month.
+        }
+        return false;
+      });
+      matchingDays.forEach((day) => {
+        day.hasEvent = true;
+      });
+    });
   }
 }
