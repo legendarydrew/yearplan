@@ -4,14 +4,13 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validator
 import { JsonPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-events-editor',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    JsonPipe
-  ],
-  templateUrl: './events-editor.component.html',
-  styleUrl: './events-editor.component.css'
+    selector: 'app-events-editor',
+    imports: [
+        ReactiveFormsModule,
+        JsonPipe
+    ],
+    templateUrl: './events-editor.component.html',
+    styleUrl: './events-editor.component.css'
 })
 export class EventsEditorComponent implements OnChanges {
   @Input() events: CalendarEvent[] = [];
