@@ -8,16 +8,15 @@ import { PublicHolidaysService } from '../../services/public-holidays.service';
 import { catchError, of } from 'rxjs';
 
 @Component({
-  selector: 'app-calendar',
-  standalone: true,
-  templateUrl: './calendar.component.html',
-  imports: [
-    CalendarHeaderComponent,
-    CalendarFooterComponent,
-    EventsListComponent,
-    PublicHolidayListComponent
-  ],
-  styleUrl: './calendar.component.css'
+    selector: 'app-calendar',
+    templateUrl: './calendar.component.html',
+    imports: [
+        CalendarHeaderComponent,
+        CalendarFooterComponent,
+        EventsListComponent,
+        PublicHolidayListComponent
+    ],
+    styleUrl: './calendar.component.css'
 })
 export class CalendarComponent implements OnChanges {
   @Input() plan!: YearPlan;
@@ -39,7 +38,7 @@ export class CalendarComponent implements OnChanges {
   generateYearCalendar(): void {
     // Before building the calendar, attempt to fetch a list of public holidays.
     this.Holidays.fetch()
-      .pipe(catchError((err) => of({})))
+      .pipe(catchError(() => of({})))
       .subscribe({
         next: (holidays) => {
           this.holidays = holidays;

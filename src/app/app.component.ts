@@ -8,11 +8,10 @@ import { EventsListComponent } from './components/events-list/events-list.compon
 import { YearSelectComponent } from './components/year-select/year-select.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CalendarComponent, EventsEditorComponent, PublicHolidayListComponent, EventsListComponent, YearSelectComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, CalendarComponent, EventsEditorComponent, PublicHolidayListComponent, EventsListComponent, YearSelectComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'yearplan';

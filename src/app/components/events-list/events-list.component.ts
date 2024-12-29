@@ -3,11 +3,10 @@ import { CalendarEvent } from '../../interfaces';
 
 // @ts-ignore
 @Component({
-  selector: 'app-events-list',
-  standalone: true,
-  imports: [],
-  templateUrl: './events-list.component.html',
-  styleUrl: './events-list.component.css'
+    selector: 'app-events-list',
+    imports: [],
+    templateUrl: './events-list.component.html',
+    styleUrl: './events-list.component.css'
 })
 export class EventsListComponent implements OnChanges {
   @Input() events: CalendarEvent[] = [];
