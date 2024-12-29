@@ -40,8 +40,8 @@
 
   @if (hasEvents) {
     <div class="calendar-events">
-      <app-events-list [events]="plan.events"></app-events-list>
       <app-public-holiday-list [events]="holidays[plan.year]"></app-public-holiday-list>
+      <app-events-list [events]="plan.events"></app-events-list>
     </div>
   }
 
