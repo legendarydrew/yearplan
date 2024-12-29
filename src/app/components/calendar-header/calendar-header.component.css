@@ -1,10 +1,11 @@
 :host {
   display: block;
-  margin-top: auto;
+  margin: 1rem 0 3rem;
 }
 
 h1 {
   display: flex;
   gap: 0.25em;
   align-items: center;
+  text-transform: uppercase;
 }
