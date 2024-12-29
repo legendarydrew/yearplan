@@ -6,6 +6,8 @@ export interface YearPlan {
 export interface CalendarSpot {
   date: number | null;
   hasEvent: boolean;
+  hasHoliday?: boolean;
+  events?: string[];
 }
 
 export interface CalendarMonth {
@@ -17,18 +19,24 @@ export interface CalendarEvent {
   name: string;
   start: {
     day: number;
-    month: number;
+    month: number; // 0-based!
   };
   end: {
     day: number | null;
-    month: number | null;
+    month: number | null; // 0-based!
   };
 }
 
 export interface PublicHoliday {
   title: string;
   day: number;
-  month: number;
+  month: number; // 0-based!
+}
+
+export interface GovUkHolidayResponse {
+  [key: string]: {
+    events: GovUkEvent[]
+  }[];
 }
 
 export interface GovUkEvent {

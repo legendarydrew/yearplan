@@ -17,15 +17,16 @@
 
 .calendar-table {
   border-collapse: collapse;
-  flex-grow: 1;
+  margin-bottom: auto;
   table-layout: fixed;
   width: 100%;
 }
 
 .month-name {
+  font-size: 11pt;
   padding-right: 1em;
   text-align: left;
-  width: 8em;
+  width: 6em;
 }
 
 .day {
@@ -36,7 +37,7 @@
 }
 
 td.day {
-  height: 2cm;
+  height: 3cm;
 }
 
 td.day:not(:empty) {
@@ -50,16 +51,29 @@ td.day:not(:empty) {
 
 /* Highlighting. */
 .day.is-weekend {
-  background: #DDD;
+  background: #ddd;
+}
+
+.day.is-holiday {
+  background: #ffcc69;
 }
 
 .day.has-event {
   background-color: #07c1ff;
-  color: white;
   font-weight: bold;
+}
+
+.day-events {
+  font-size: 8pt;
+  font-weight: 500;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 
 .calendar-events {
+  display: flex;
+  gap: 1em;
   margin: 1.5rem 0;
 }

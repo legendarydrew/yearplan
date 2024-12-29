@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { EventsEditorComponent } from './components/events-editor/events-editor.component';
 import { CalendarEvent, PublicHoliday, YearPlan } from './interfaces';
-import { PublicHolidaysService } from './services/public-holidays.service';
 import { PublicHolidayListComponent } from './components/public-holiday-list/public-holiday-list.component';
 import { EventsListComponent } from './components/events-list/events-list.component';
 import { YearSelectComponent } from './components/year-select/year-select.component';
@@ -25,23 +24,12 @@ export class AppComponent implements OnInit {
     events: []
   };
 
-  constructor(private readonly Holidays: PublicHolidaysService) {
-  }
-
   ngOnInit() {
     // Fetch any saved events from localStorage.
     const yp = localStorage.getItem('yp');
     if (yp) {
       this.plan = { ...this.plan, ...JSON.parse(yp) };
     }
-
-    // Fetch public holidays for the year.
-    // this.Holidays.fetch(this.plan.year)
-    //   .subscribe({
-    //     next: (events: PublicHoliday[]) => {
-    //       this.publicHolidays = events;
-    //     }
-    //   });
   }
 
   /**
@@ -49,7 +37,7 @@ export class AppComponent implements OnInit {
    * @param year
    */
   updateYearHandler(year: number): void {
-    this.plan = {...this.plan, year};
+    this.plan = { ...this.plan, year };
     localStorage.setItem('yp', JSON.stringify(this.plan));
   }
 
@@ -58,7 +46,7 @@ export class AppComponent implements OnInit {
    * @param events
    */
   updateEventsHandler(events: CalendarEvent[]): void {
-    this.plan = { ...this.plan, events};
+    this.plan = { ...this.plan, events };
     localStorage.setItem('yp', JSON.stringify(this.plan));
   }
 

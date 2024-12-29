@@ -17,9 +17,19 @@
         <tr>
           <th class="month-name" scope="row">{{ month.name }}</th>
           @for (day of month.days; track day) {
-            <td class="day" [class.has-event]="day.hasEvent" [class.is-weekend]="day.date && isWeekend($index)">
+            <td class="day"
+                [class.has-event]="day.hasEvent"
+                [class.is-holiday]="day.hasHoliday"
+                [class.is-weekend]="day.date && isWeekend($index)">
               @if (day.date) {
                 <span class="day-number">{{ day.date }}</span>
+              }
+              @if (day.hasEvent || day.hasHoliday) {
+                <ul class="day-events">
+                  @for (event of day.events; track event) {
+                    <li>{{ event }}</li>
+                  }
+                </ul>
               }
             </td>
           }
@@ -31,6 +41,7 @@
   @if (hasEvents) {
     <div class="calendar-events">
       <app-events-list [events]="plan.events"></app-events-list>
+      <app-public-holiday-list [events]="holidays[plan.year]"></app-public-holiday-list>
     </div>
   }
 
