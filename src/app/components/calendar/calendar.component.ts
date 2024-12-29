@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CalendarMonth, CalendarSpot, YearPlan } from '../../interfaces';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { CalendarMonth, CalendarSpot, PublicHoliday, YearPlan } from '../../interfaces';
 import { CalendarHeaderComponent } from '../calendar-header/calendar-header.component';
 import { CalendarFooterComponent } from '../calendar-footer/calendar-footer.component';
 import { EventsListComponent } from '../events-list/events-list.component';
 import { PublicHolidayListComponent } from '../public-holiday-list/public-holiday-list.component';
+import { PublicHolidaysService } from '../../services/public-holidays.service';
 
 @Component({
   selector: 'app-calendar',
@@ -17,13 +18,25 @@ import { PublicHolidayListComponent } from '../public-holiday-list/public-holida
   ],
   styleUrl: './calendar.component.css'
 })
-export class CalendarComponent implements OnChanges {
+export class CalendarComponent implements OnInit, OnChanges {
   @Input() plan!: YearPlan;
 
+  holidays: { [key: number]: PublicHoliday[] } = {};
   months: CalendarMonth[] = [];
   weekdayNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weekdaySpots: null[] = [];
 
+  constructor(private readonly Holidays: PublicHolidaysService) {
+  }
+
+  ngOnInit(): void {
+    this.Holidays.fetch()
+      .subscribe({
+        next: (holidays) => {
+          this.holidays = holidays;
+        }
+      });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['plan']) {
@@ -63,6 +76,7 @@ export class CalendarComponent implements OnChanges {
     this.weekdaySpots = Array(spotCount);
 
     this.matchEventsToSpots();
+    this.matchHolidaysToSpots();
   }
 
   isWeekend(dayIndex: number): boolean {
@@ -70,7 +84,7 @@ export class CalendarComponent implements OnChanges {
   }
 
   get hasEvents(): boolean {
-    return this.plan.events.length > 0;
+    return this.plan.events.length > 0 || this.holidays[this.plan.year]?.length > 0;
   }
 
   matchEventsToSpots(): void {
@@ -90,6 +104,26 @@ export class CalendarComponent implements OnChanges {
         day.hasEvent = true;
         day.events = day.events ?? [];
         day.events.push(event.name);
+      });
+    });
+  }
+
+  matchHolidaysToSpots(): void {
+    if (!this.holidays[this.plan.year]) {
+      return;
+    }
+
+    this.holidays[this.plan.year].forEach((event) => {
+      const matchingDays = this.months[event.month].days.filter((day) => {
+        if (day.date) {
+          return event.day === day.date;
+        }
+        return false;
+      });
+      matchingDays.forEach((day) => {
+        day.hasHoliday = true;
+        day.events = day.events ?? [];
+        day.events.unshift(event.title);
       });
     });
   }

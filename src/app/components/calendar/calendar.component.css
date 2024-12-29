@@ -23,9 +23,10 @@
 }
 
 .month-name {
+  font-size: 11pt;
   padding-right: 1em;
   text-align: left;
-  width: 8em;
+  width: 6em;
 }
 
 .day {
@@ -50,17 +51,20 @@ td.day:not(:empty) {
 
 /* Highlighting. */
 .day.is-weekend {
-  background: #DDD;
+  background: #ddd;
+}
+
+.day.is-holiday {
+  background: #ffcc69;
 }
 
 .day.has-event {
   background-color: #07c1ff;
-  color: white;
   font-weight: bold;
 }
 
 .day-events {
-  font-size: 0.8em;
+  font-size: 8pt;
   font-weight: 500;
   list-style: none;
   margin: 0;
