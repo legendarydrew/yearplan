@@ -8,7 +8,7 @@
     <tr>
       <th class="month-name" scope="col">&nbsp;</th>
       @for (day of weekdaySpots; track $index) {
-        <th class="day" scope="col">{{ weekdayNames[$index % 7] }}</th>
+        <th class="day day-name" scope="col">{{ weekdayNames[$index % 7] }}</th>
       }
     </tr>
     </thead>
