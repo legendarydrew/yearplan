@@ -33,6 +33,12 @@ export interface PublicHoliday {
   month: number; // 0-based!
 }
 
+export interface GovUkHolidayResponse {
+  [key: string]: {
+    events: GovUkEvent[]
+  }[];
+}
+
 export interface GovUkEvent {
   title: string;
   date: string; // yyyy-mm-dd
