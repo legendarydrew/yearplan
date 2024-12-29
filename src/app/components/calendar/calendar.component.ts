@@ -100,7 +100,6 @@ export class CalendarComponent implements OnChanges {
           } else {
             return event.start.day === day.date;
           }
-          // TODO address events that span more than one month.
         }
         return false;
       });
