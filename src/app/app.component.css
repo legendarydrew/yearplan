@@ -1,4 +1,11 @@
 @media print {
+  @page {
+    /* https://stackoverflow.com/questions/1545849/possible-to-force-printer-setup-paper-size-in-javascript */
+    size: landscape;
+    height: 594mm;
+    width: 841mm;
+  }
+
   :not(app-calendar) {
     display: none;
   }

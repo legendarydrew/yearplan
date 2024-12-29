@@ -4,6 +4,13 @@
   height: 50vh;
 }
 
+@media print {
+  :host {
+    height: auto;
+    overflow: hidden;
+  }
+}
+
 .calendar-container {
   line-height: 1;
   padding: 1em;
