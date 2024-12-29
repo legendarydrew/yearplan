@@ -8,7 +8,7 @@
     <tr>
       <th class="month-name" scope="col">&nbsp;</th>
       @for (day of weekdaySpots; track $index) {
-        <th class="day" scope="col">{{ weekdayNames[$index % 7] }}</th>
+        <th class="day day-name" scope="col">{{ weekdayNames[$index % 7] }}</th>
       }
     </tr>
     </thead>
@@ -40,8 +40,8 @@
 
   @if (hasEvents) {
     <div class="calendar-events">
-      <app-events-list [events]="plan.events"></app-events-list>
       <app-public-holiday-list [events]="holidays[plan.year]"></app-public-holiday-list>
+      <app-events-list [events]="plan.events"></app-events-list>
     </div>
   }
 

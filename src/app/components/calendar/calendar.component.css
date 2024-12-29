@@ -4,6 +4,13 @@
   height: 50vh;
 }
 
+@media print {
+  :host {
+    height: auto;
+    overflow: hidden;
+  }
+}
+
 .calendar-container {
   line-height: 1;
   padding: 1em;
@@ -22,8 +29,14 @@
   width: 100%;
 }
 
+.day-name,
 .month-name {
-  font-size: 11pt;
+  font: 11pt "Cooper Hewitt Modified", 'Rubik', sans-serif;
+  text-transform: uppercase;
+}
+
+.month-name {
+  font-size: 14pt;
   padding-right: 1em;
   text-align: left;
   width: 6em;
@@ -74,6 +87,6 @@ td.day:not(:empty) {
 
 .calendar-events {
   display: flex;
-  gap: 1em;
+  gap: 5em;
   margin: 1.5rem 0;
 }
