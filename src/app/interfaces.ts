@@ -19,18 +19,18 @@ export interface CalendarEvent {
   name: string;
   start: {
     day: number;
-    month: number;
+    month: number; // 0-based!
   };
   end: {
     day: number | null;
-    month: number | null;
+    month: number | null; // 0-based!
   };
 }
 
 export interface PublicHoliday {
   title: string;
   day: number;
-  month: number;
+  month: number; // 0-based!
 }
 
 export interface GovUkEvent {

@@ -1,10 +1,11 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CalendarMonth, CalendarSpot, PublicHoliday, YearPlan } from '../../interfaces';
 import { CalendarHeaderComponent } from '../calendar-header/calendar-header.component';
 import { CalendarFooterComponent } from '../calendar-footer/calendar-footer.component';
 import { EventsListComponent } from '../events-list/events-list.component';
 import { PublicHolidayListComponent } from '../public-holiday-list/public-holiday-list.component';
 import { PublicHolidaysService } from '../../services/public-holidays.service';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -18,7 +19,7 @@ import { PublicHolidaysService } from '../../services/public-holidays.service';
   ],
   styleUrl: './calendar.component.css'
 })
-export class CalendarComponent implements OnInit, OnChanges {
+export class CalendarComponent implements OnChanges {
   @Input() plan!: YearPlan;
 
   holidays: { [key: number]: PublicHoliday[] } = {};
@@ -29,15 +30,6 @@ export class CalendarComponent implements OnInit, OnChanges {
   constructor(private readonly Holidays: PublicHolidaysService) {
   }
 
-  ngOnInit(): void {
-    this.Holidays.fetch()
-      .subscribe({
-        next: (holidays) => {
-          this.holidays = holidays;
-        }
-      });
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes['plan']) {
       this.generateYearCalendar();
@@ -45,6 +37,19 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   generateYearCalendar(): void {
+    // Before building the calendar, attempt to fetch a list of public holidays.
+    this.Holidays.fetch()
+      .pipe(catchError((err) => of({})))
+      .subscribe({
+        next: (holidays) => {
+          this.holidays = holidays;
+          // Regardless of whether we have public holidays, build the calendar with what we have.
+          this.buildCalendar();
+        }
+      });
+  }
+
+  protected buildCalendar(): void {
     const currentYear = this.plan.year;
     let spotCount = 0;
     let months: CalendarMonth[] = [];
@@ -113,18 +118,13 @@ export class CalendarComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.holidays[this.plan.year].forEach((event) => {
-      const matchingDays = this.months[event.month].days.filter((day) => {
-        if (day.date) {
-          return event.day === day.date;
-        }
-        return false;
-      });
-      matchingDays.forEach((day) => {
-        day.hasHoliday = true;
-        day.events = day.events ?? [];
-        day.events.unshift(event.title);
-      });
+    this.holidays[this.plan.year].forEach((event: PublicHoliday) => {
+      const matchingDay = this.months[event.month].days.find((day) => event.day === day.date);
+      if (matchingDay) {
+        matchingDay.hasHoliday = true;
+        matchingDay.events = matchingDay.events ?? [];
+        matchingDay.events.unshift(event.title);
+      }
     });
   }
 }

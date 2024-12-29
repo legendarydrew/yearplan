@@ -73,5 +73,7 @@ td.day:not(:empty) {
 
 
 .calendar-events {
+  display: flex;
+  gap: 1em;
   margin: 1.5rem 0;
 }

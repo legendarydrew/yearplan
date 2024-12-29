@@ -27,7 +27,9 @@ export class PublicHolidaysService {
               let [year, month, day] = row.date.split('-').map((v: string) => parseInt(v));
               holidays[year] = holidays[year] ?? [];
               holidays[year].push({
-                title: row.title, day, month
+                title: row.title.split(' ').map((s: string) => s.charAt(0).toUpperCase() + s.slice(1)).join(' '),
+                day,
+                month: month - 1
               });
             });
             this.holidays$!.next(holidays);
