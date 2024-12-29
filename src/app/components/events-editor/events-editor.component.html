@@ -1,0 +1,63 @@
+<ul class="fs-6 m-3 px-0">
+  @for (event of eventsList; track event) {
+    <li class="list-unstyled">
+      <b>{{ getEventDate(event)}}</b> {{ event.name }}
+      <button class="btn btn-sm btn-danger" (click)="removeHandler($index)">Remove</button>
+    </li>
+  }
+</ul>
+
+<div class="m-2 p-2 bg-light">
+  <form class="row align-items-end" [formGroup]="form" (ngSubmit)="addHandler()">
+
+    <div class="col-4">
+      <label class="form-label fw-bold" for="eventName">Event Name</label>
+      <input class="form-control" id="eventName" type="text" formControlName="name">
+    </div>
+
+    <div class="col-3" formGroupName="start">
+
+      <b>Start date</b>
+      <div class="row g-2">
+        <div class="col-4">
+          <label class="form-label" for="eventDayStart">Day</label>
+          <input class="form-control" id="eventDayStart" type="number" min="1" max="31" formControlName="day">
+        </div>
+
+        <div class="col-8">
+          <label class="form-label" for="eventMonthStart">Month</label>
+          <select class="form-select" id="eventMonthStart" formControlName="month">
+            @for (month of months; track $index) {
+              <option [ngValue]="$index">{{ month }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-3" formGroupName="end">
+      <b>End date</b>
+
+      <div class="row g-2">
+        <div class="col-4">
+          <label class="form-label" for="eventDayFinish">Day</label>
+          <input class="form-control" id="eventDayFinish" type="number" min="1" max="31" formControlName="day">
+        </div>
+        <div class="col-8">
+          <label class="form-label" for="eventMonthFinish">Month</label>
+          <select class="form-select" id="eventMonthFinish" formControlName="month">
+            @for (month of months; track $index) {
+              <option [ngValue]="$index">{{ month }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2 d-grid">
+      <button class="btn btn-success" type="submit" [disabled]="form.invalid">Add event</button>
+    </div>
+  </form>
+</div>

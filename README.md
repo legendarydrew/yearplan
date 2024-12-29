@@ -1,14 +1,27 @@
 # Yearplan
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+A project for generating a year planner, with public holidays (England and Wales) and custom events marked on the calendar.
+
+The calendar is intended to be printed on a single A1 sheet in landscape mode. 
+
+The project was originally created very quickly for 2025: the year where content planning and *actually* posting became important. As such, the code isn't going to be professional grade, and will be left open to improvements for the next year.
+
+This project was initially generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3, and jump-started with the help of ChatGPT.
+
+## TODOs
+- Address events that span more than one month.
+- With events spanning multiple days: do you want to display the event name more than once?
+- Update the appearance of the events list in the events editor component.
+- Update the appearance of the events editor: perhaps a floating, collapsible panel?
+- Investigate why the navbar is not sticky.
+- Ability to update existing events.
+- Use icons where necessary.
+- Review the colours used for custom events, public holidays and weekends.
+- The list of events on the calendar should wrap onto multiple columns, if necessary.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 

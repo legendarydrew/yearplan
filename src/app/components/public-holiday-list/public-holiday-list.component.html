@@ -1,0 +1,8 @@
+<h2>Public Holidays</h2>
+<ul>
+  @for (event of events; track event) {
+  <li>
+    <b>{{ getEventDate(event) }}</b> {{ getEventName(event) }}
+  </li>
+  }
+</ul>

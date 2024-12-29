@@ -1,0 +1,92 @@
+:host {
+  display: block;
+  overflow: auto;
+  height: 50vh;
+}
+
+@media print {
+  :host {
+    height: auto;
+    overflow: hidden;
+  }
+}
+
+.calendar-container {
+  line-height: 1;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* A1 sheet. */
+  height: 594mm;
+  width: 841mm;
+}
+
+.calendar-table {
+  border-collapse: collapse;
+  margin-bottom: auto;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.day-name,
+.month-name {
+  font: 11pt "Cooper Hewitt Modified", 'Rubik', sans-serif;
+  text-transform: uppercase;
+}
+
+.month-name {
+  font-size: 14pt;
+  padding-right: 1em;
+  text-align: left;
+  width: 6em;
+}
+
+.day {
+  width: 2cm;
+  padding: 0.25em;
+  vertical-align: top;
+  text-align: left;
+}
+
+td.day {
+  height: 3cm;
+}
+
+td.day:not(:empty) {
+  border: 2px solid #111;
+}
+
+.day .day-number {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+/* Highlighting. */
+.day.is-weekend {
+  background: #ddd;
+}
+
+.day.is-holiday {
+  background: #ffcc69;
+}
+
+.day.has-event {
+  background-color: #07c1ff;
+  font-weight: bold;
+}
+
+.day-events {
+  font-size: 8pt;
+  font-weight: 500;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.calendar-events {
+  display: flex;
+  gap: 5em;
+  margin: 1.5rem 0;
+}

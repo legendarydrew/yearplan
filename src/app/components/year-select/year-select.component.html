@@ -1,0 +1,6 @@
+<label class="form-label text-nowrap mb-0" for="yearSelect">Select year</label>
+<select id="yearSelect" class="form-select" [(ngModel)]="year" (ngModelChange)="updateHandler()">
+  @for (year of years; track year) {
+    <option [ngValue]="year">{{ year }}</option>
+  }
+</select>

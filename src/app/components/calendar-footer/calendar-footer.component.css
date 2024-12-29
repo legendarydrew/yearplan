@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+p {
+  font-size: 9pt;
+  padding: 0.5rem 1em;
+  text-align: right;
+}
